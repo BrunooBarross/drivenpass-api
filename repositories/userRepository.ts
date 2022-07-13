@@ -22,7 +22,7 @@ export async function insertUser(userData: UserInsertData) {
 
 export async function findByEmail(email: string) {
     const result = await connection.query(`
-        SELECT * FROM users WHERE email = $1 
+        SELECT * FROM users u WHERE email = $1
     `, [email]);
     return result.rows[0];
 }
