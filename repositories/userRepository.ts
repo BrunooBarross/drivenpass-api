@@ -19,3 +19,10 @@ export async function insertUser(userData: UserInsertData) {
         VALUES ($1, $2)
     `, [email, password])
 }  
+
+export async function findByEmail(email: string) {
+    const result = await connection.query(`
+        SELECT * FROM users WHERE email = $1 
+    `, [email]);
+    return result.rows[0];
+}
