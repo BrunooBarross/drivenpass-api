@@ -24,10 +24,20 @@ export async function getCredentials(userId: number){
 }
 
 export async function getCredentialId(id: number, userId: number){
+    const findCredential = await verifyCredentialId(id, userId);
+    decryptPassword(findCredential);
+    return findCredential;
+}
+
+export async function deleteCredentialId(id: number, userId: number){
+    await verifyCredentialId(id, userId);
+    await credentialRepository.deleteCredential(id);
+}
+
+async function verifyCredentialId(id: number, userId: number){
     const findCredential = await credentialRepository.findById(id, userId);
     if(findCredential.length===0){
-        throw { type: 'not_Found', message: `you don't have credentials with id ${id}`}
+        throw { type: 'unauthorized', message: `you don't have credentials with id ${id}`}
     }
-    const credential = decryptPassword(findCredential);
     return findCredential;
 }
