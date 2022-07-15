@@ -4,7 +4,7 @@ import { Credential } from "@prisma/client";
 export type CredentialInsertData = Omit<Credential, "id" | "createdAt">;
 
 export async function findTitle(userId: number, title: string) {
-    const result = await prisma.credential.findMany({ 
+    const result = await prisma.credential.findFirst({ 
         where: {
             userId: userId,
             title: {
@@ -23,4 +23,25 @@ export async function insertCredential(credentialData: CredentialInsertData){
             ...credentialData
         }
     });
+}
+
+export async function getAllCredentials(userId: number){
+    const result = await prisma.credential.findMany({
+        where: {
+            userId
+        }
+    });
+
+    return result;
+}
+
+export async function findById(id: number, userId: number){
+    const result = await prisma.credential.findMany({
+        where:{
+            id,
+            userId
+        }
+    })
+
+    return result;
 }
