@@ -15,5 +15,6 @@ export async function validateToken(req: Request, res: Response, next: NextFunct
     if (!findUser) {
         throw { type: "unauthorized", message: "it is necessary to send a token"}
     }
+    res.locals.userId = user.userId;
     next();
 }
