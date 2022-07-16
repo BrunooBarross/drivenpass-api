@@ -16,3 +16,8 @@ export function decryptPassword(data: Array<CredentialInsertData>){
     })
     return data;
 }
+
+export function encryptCVC(cvc: string){
+    const encrypt = cryptr.encrypt(cvc);
+    return encrypt;
+}

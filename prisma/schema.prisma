@@ -16,6 +16,7 @@ model Users {
   password  String     
   Credential Credential[]
   Note Note[]
+  Card Card[]
   @@map("users")
 }
 
@@ -39,4 +40,27 @@ model Note {
   note String
   createdAt DateTime @default(now())
   @@map("notes")
+}
+
+enum Type {
+  debit
+  credit
+  debitAndCredit
+}
+
+model Card {
+  id Int @id @default(autoincrement())
+  userId Int
+  user Users @relation(fields: [userId], references: [id])
+  title String
+  number String
+  name String
+  cvc String
+  expirationDate String
+  password String
+  isVirtual Boolean
+  type Type
+  createdAt DateTime @default(now())
+  
+  @@map("cards")
 }
