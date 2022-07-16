@@ -7,3 +7,9 @@ export async function createNote(req: Request, res: Response){
     await notesService.createNote(data);
     res.sendStatus(201);
 }
+
+export async function getNotes(req: Request, res: Response){
+    const { userId } = res.locals;
+    const notes = await notesService.getAllNotes(userId);
+    res.status(200).send(notes);
+}

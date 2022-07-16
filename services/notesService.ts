@@ -12,3 +12,8 @@ async function checkExistenceOfNote(userId: number, title: string){
         throw { type: 'unauthorized', message: `you already have a note with title ${title}`}
     }
 }
+
+export async function getAllNotes(userId: number){
+    const notes = await notesReposiroty.getNotes(userId);
+    return notes;
+}

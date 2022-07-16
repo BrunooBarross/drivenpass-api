@@ -24,3 +24,12 @@ export async function insertNote(data: NoteInsertData){
         }
     });
 }
+
+export async function getNotes(userId: number){
+    const result = await prisma.note.findMany({
+        where:{
+            userId
+        }
+    });
+    return result;
+}
