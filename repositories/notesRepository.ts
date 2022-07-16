@@ -33,3 +33,21 @@ export async function getNotes(userId: number){
     });
     return result;
 }
+
+export async function findById(noteId: number, userId: number){
+    const result = await prisma.note.findFirst({
+        where:{
+            id: noteId,
+            userId
+        }
+    });
+    return result;
+}
+
+export async function deleteNoteById(noteId: number){
+    await prisma.note.delete({
+        where:{
+            id: noteId
+        }
+    });
+}
