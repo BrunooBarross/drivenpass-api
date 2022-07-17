@@ -11,7 +11,7 @@ export function encryptPassword(password: string){
     return encrypt;
 }
 
-export function decryptPassword(data: Array<CredentialInsertData> |  Array<CreditCardInsertData>){
+export function decryptPassword(data: Array<CredentialInsertData> |  Array<CreditCardInsertData> | any){
     data.map(item =>{
         item.password= cryptr.decrypt(item.password)
     })

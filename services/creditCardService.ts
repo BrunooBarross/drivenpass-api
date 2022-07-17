@@ -25,3 +25,19 @@ export async function getAllCreditCards(userId: number){
     const decryptedCards = decryptCVC(decryptedPassword);
     return decryptedCards;
 }
+
+export async function getCreditCard(cardId: number, userId: number){
+    const card = await checkExistenceCardById(cardId, userId);
+    const decryptedPassword = decryptPassword([card]);
+    const decryptedCard = decryptCVC(decryptedPassword);
+    return decryptedCard;
+}
+
+
+async function checkExistenceCardById(cardId: number, userId: number){
+    const existsCard = await creditCardRepository.getCardById(cardId, userId);
+    if(!existsCard){
+        throw { type: 'not_Found', message: `User does not have cards with the id ${cardId}`}
+    }
+    return existsCard;
+}

@@ -32,3 +32,13 @@ export async function getAllCards(userId: number){
     });
     return result
 }
+
+export async function getCardById(cardId: number, userId: number){
+    const result = prisma.card.findFirst({
+        where:{
+            id: cardId,
+            userId
+        }
+    });
+    return result;
+}

@@ -12,3 +12,10 @@ export async function getCreditCards(req: Request, res: Response){
     const cards = await creditCardService.getAllCreditCards(userId);
     res.status(200).send(cards);
 }
+
+export async function getCreditCardById(req: Request, res: Response){
+    const id = parseInt(req.params.id);
+    const { userId } = res.locals;
+    const card = await creditCardService.getCreditCard(id, userId);
+    res.status(200).send(card);
+}
