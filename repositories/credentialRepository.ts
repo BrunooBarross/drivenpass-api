@@ -36,7 +36,7 @@ export async function getAllCredentials(userId: number){
 }
 
 export async function findById(id: number, userId: number){
-    const result = await prisma.credential.findMany({
+    const result = await prisma.credential.findFirst({
         where:{
             id,
             userId

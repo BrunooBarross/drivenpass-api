@@ -25,7 +25,7 @@ export async function getCredentials(userId: number){
 
 export async function getCredentialId(id: number, userId: number){
     const findCredential = await verifyCredentialId(id, userId);
-    decryptPassword(findCredential);
+    decryptPassword([findCredential]);
     return findCredential;
 }
 
@@ -36,7 +36,7 @@ export async function deleteCredentialId(id: number, userId: number){
 
 async function verifyCredentialId(id: number, userId: number){
     const findCredential = await credentialRepository.findById(id, userId);
-    if(findCredential.length===0){
+    if(!findCredential){
         throw { type: 'unauthorized', message: `you don't have credentials with id ${id}`}
     }
     return findCredential;
