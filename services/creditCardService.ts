@@ -1,6 +1,6 @@
 import { CreditCardInsertData } from "../repositories/creditCardRepository.js";
 import * as creditCardRepository from "../repositories/creditCardRepository.js"
-import { encryptCVC, encryptPassword } from "../utils/cryptrDecryptrPassword.js";
+import { decryptCVC, decryptPassword, encryptCVC, encryptPassword } from "../utils/cryptrDecryptrPassword.js";
 
 export async function creditCardData(data: CreditCardInsertData){
     await verifyExistTitle(data.title, data.userId);
@@ -17,4 +17,11 @@ async function verifyExistTitle(title: string, userId: number){
     if(existsTitle){
         throw { type: 'conflict', message: `The title "${title}" is already in use`}
     }
+}
+
+export async function getAllCreditCards(userId: number){
+    const cards = await creditCardRepository.getAllCards(userId);
+    const decryptedPassword = decryptPassword(cards);
+    const decryptedCards = decryptCVC(decryptedPassword);
+    return decryptedCards;
 }

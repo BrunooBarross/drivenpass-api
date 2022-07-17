@@ -23,3 +23,12 @@ export async function insertCard(data: CreditCardInsertData){
         }
     });
 }
+
+export async function getAllCards(userId: number){
+    const result = await prisma.card.findMany({
+        where:{
+            userId
+        }
+    });
+    return result
+}
