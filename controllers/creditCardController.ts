@@ -19,3 +19,10 @@ export async function getCreditCardById(req: Request, res: Response){
     const card = await creditCardService.getCreditCard(id, userId);
     res.status(200).send(card);
 }
+
+export async function deleteCreditCard(req: Request, res: Response){
+    const id = parseInt(req.params.id);
+    const { userId } = res.locals;
+    await creditCardService.deleteCrediteCard(id, userId);
+    res.sendStatus(200);
+}

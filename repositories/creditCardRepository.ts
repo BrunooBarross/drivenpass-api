@@ -42,3 +42,11 @@ export async function getCardById(cardId: number, userId: number){
     });
     return result;
 }
+
+export async function deleteCardById(cardId){
+    await prisma.card.delete({
+        where:{
+            id: cardId
+        }
+    });
+}

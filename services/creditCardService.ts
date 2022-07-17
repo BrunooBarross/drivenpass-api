@@ -33,6 +33,10 @@ export async function getCreditCard(cardId: number, userId: number){
     return decryptedCard;
 }
 
+export async function deleteCrediteCard(cardId: number, userId: number){
+    await checkExistenceCardById(cardId, userId);
+    await creditCardRepository.deleteCardById(cardId);
+}
 
 async function checkExistenceCardById(cardId: number, userId: number){
     const existsCard = await creditCardRepository.getCardById(cardId, userId);
