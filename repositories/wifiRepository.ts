@@ -20,3 +20,13 @@ export async function findAllWifi(userId: number){
     
     return result;
 }
+
+export async function findById(id: number, userId: number){
+    const result = await prisma.wifi.findFirst({
+        where:{
+            id,
+            userId
+        }
+    });
+    return result;
+}
