@@ -30,3 +30,11 @@ export async function findById(id: number, userId: number){
     });
     return result;
 }
+
+export async function deleteCardById(id: number){
+    await prisma.wifi.delete({
+        where:{
+            id
+        }
+    });
+}

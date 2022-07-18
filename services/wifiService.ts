@@ -19,6 +19,11 @@ export async function getWifiById(id: number, userId: number){
     return decryptpasswordWifi;
 }
 
+export async function deleteWifi(id: number, userId: number){
+    const wifi = await checkExistenceWifiById(id, userId);
+    await wifirepository.deleteCardById(id);
+}
+
 async function checkExistenceWifiById(id: number, userId: number){
     const result = await wifirepository.findById(id, userId);
     if(!result){

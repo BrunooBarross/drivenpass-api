@@ -20,3 +20,10 @@ export async function getWifiById(req: Request, res: Response){
     const wifi = await wifiService.getWifiById(id, userId);
     res.status(200).send(wifi);
 }
+
+export async function deleteWifi(req: Request, res: Response){
+    const id = parseInt(req.params.id);
+    const { userId } = res.locals;
+    await wifiService.deleteWifi(id, userId);
+    res.sendStatus(200);
+}
